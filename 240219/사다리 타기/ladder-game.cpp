@@ -3,21 +3,22 @@
 #include <cmath>
 using namespace std;
 
-int n, m, result{ 0 };
+int humanNum, lineNum;
+
 int ladder[17][12]{ 0, };
+vector<pair<int, int>> lines;
+bool* lineCkd;
+int lineCount = 0;
 
-bool *ladderIncluded;
-int currentLadderCount{ 0 };
-int smallestLadderCount;
+int iniV;
+int lowestNum;
 
-vector<pair<int, int>> locations;
-
-int ladder_go() {
+int game() {
 	int sum{ 0 };
-	for (int i = 1; i <= n; i++) {
-		int x = i;
-		int y = 1;
-		while (y <= 16) {
+
+	for (int i = 1; i <= humanNum; i++) {
+		int x{ i };
+		for(int y=1;y<=16;y++) {
 			switch (ladder[y][x]) {
 			case 1:
 				x++;
@@ -26,78 +27,63 @@ int ladder_go() {
 				x--;
 				break;
 			}
-				y++;
 		}
-		sum += i * pow(10, x);
+		sum += i * pow(10, humanNum - x);
 	}
-	return sum;
+//	cout << sum << endl;
+	return sum; 
 }
 
-void update() {
-	for (int i = 0; i < m; i++) {
-		int x = locations[i].first;
-		int y = locations[i].second;
-		if (ladderIncluded[i]) {
-			ladder[y][x] = 1;
-			ladder[y][x+1] = -1;
+void task(int cmd) {
+	if (cmd == lineNum) {
+		lineCount = 0;
+		for (int i = 0; i < lineNum; i++) {
+	//		cout<<"["<<lineCkd[i] << "]";
+			lineCount+=lineCkd[i];
 		}
-		else {
-			ladder[y][x] = 0;
-			ladder[y][x+1] = 0;
-		}
-	}
-}
-
-void task(int cnt) {
-	
-	if (cnt == m) {
-		update();
-		int k = ladder_go();
-		if (k == result) {
-			currentLadderCount = 0;
-			for (int i = 0; i < m; i++) {
-				currentLadderCount +=ladderIncluded[i];
-			}
-			if (currentLadderCount < smallestLadderCount) {
-				smallestLadderCount = currentLadderCount;
-			}
+	//	cout<<":"<<lineCount << ":" << endl;
+		if (game() == iniV && lineCount<lowestNum) {
+			lowestNum = lineCount;
 		}
 		return;
 	}
 
-	ladderIncluded[cnt] = 1;
-	task(cnt + 1);
-	
-	ladderIncluded[cnt] = 0;
-	task(cnt + 1);
-} 
+	int y = lines[cmd].first;
+	int x = lines[cmd].second;
 
+	{
+		lineCkd[cmd] = 1;
+		ladder[y][x] = 1;
+		ladder[y][x + 1] = -1;
+	}
+	task(cmd + 1);
+
+	{
+		lineCkd[cmd] = 0;
+		ladder[y][x] = 0;
+		ladder[y][x+1]=0;
+	}
+	task(cmd + 1);
+}
 
 
 int main() {
+	
+	cin >> humanNum >> lineNum;
+	
+	lineCkd = new bool[lineNum] {true, };
 
-	cin >> n >> m;
-	for (int i = 0; i < 16;i++) {
-		for (int k = 0; k < n; k++) {
-			ladder[i][k] = 0;
-		}
-	}
-
-	ladderIncluded = new bool[m] {1, };
-	smallestLadderCount = m;
-	currentLadderCount = m;
-	int x, y;
-	for (int i = 0; i < m; i++) {
+	for (int i = 0; i < lineNum; i++) {
+		int x, y;
 		cin >> x >> y;
+		lines.push_back({ y,x });
 		ladder[y][x] = 1;
-		ladder[y][x + 1] = -1;
-		locations.push_back({x, y});
+		ladder[y][x+1] = -1;
 	}
 
-
-	result = ladder_go(); 
+	iniV = game();
+	lowestNum = lineNum;
 	task(0);
-
-	cout << smallestLadderCount;
+	cout << lowestNum;
 
 }
