@@ -30,7 +30,7 @@ double game() {
 		}
 		sum += i * pow(10, humanNum - x);
 	}
-	cout << sum << endl;
+//	cout << sum << endl;
 	return sum; 
 }
 
@@ -38,10 +38,10 @@ void task(int cmd) {
 	if (cmd == lineNum) {
 		lineCount = 0;
 		for (int i = 0; i < lineNum; i++) {
-			cout<<"["<<lineCkd[i] << "]";
+//			cout<<"["<<lineCkd[i] << "]";
 			lineCount+=lineCkd[i];
 		}
-		cout<<":"<<lineCount << ":" << endl;
+//		cout<<":"<<lineCount << ":" << endl;
 		if (game() == iniV && lineCount<lowestNum) {
 			lowestNum = lineCount;
 		}
