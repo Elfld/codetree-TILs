@@ -70,7 +70,7 @@ void task(int cnt) {
 int main() {
 
 	cin >> n >> m;
-	for (int i = 0; i < m;i++) {
+	for (int i = 0; i < 16;i++) {
 		for (int k = 0; k < n; k++) {
 			ladder[i][k] = 0;
 		}
