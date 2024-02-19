@@ -4,7 +4,7 @@
 using namespace std;
 
 int n, m, result{ 0 };
-int ladder[16][15];
+int ladder[16][12];
 
 bool *ladderIncluded;
 int currentLadderCount{ 0 };
@@ -17,20 +17,16 @@ int ladder_go() {
 	for (int i = 1; i <= n; i++) {
 		int x = i;
 		int y = 1;
-		while (y <= m) {
+		while (y <= 16) {
 			switch (ladder[y][x]) {
 			case 1:
 				x++;
-				y++;
 				break;
 			case -1:
 				x--;
-				y++;
-				break;
-			case 0:
-				y++;
 				break;
 			}
+			y++;
 		}
 		sum += i*pow(10, n - x); // (3|4|1|2 =>3412)
 	}
@@ -69,7 +65,7 @@ void task(int cnt) {
 	}
 
 	task(cnt + 1);
-}
+} 
 
 int main() {
 
