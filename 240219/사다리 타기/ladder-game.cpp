@@ -4,7 +4,7 @@
 using namespace std;
 
 int n, m, result{ 0 };
-int ladder[16][12];
+int ladder[17][12]{ 0, };
 
 bool *ladderIncluded;
 int currentLadderCount{ 0 };
@@ -26,16 +26,32 @@ int ladder_go() {
 				x--;
 				break;
 			}
-			y++;
+				y++;
 		}
-		sum += i*pow(10, n - x); // (3|4|1|2 =>3412)
+		sum += i * pow(10, x);
 	}
 	return sum;
+}
+
+void update() {
+	for (int i = 0; i < m; i++) {
+		int x = locations[i].first;
+		int y = locations[i].second;
+		if (ladderIncluded[i]) {
+			ladder[y][x] = 1;
+			ladder[y][x+1] = -1;
+		}
+		else {
+			ladder[y][x] = 0;
+			ladder[y][x+1] = 0;
+		}
+	}
 }
 
 void task(int cnt) {
 	
 	if (cnt == m) {
+		update();
 		int k = ladder_go();
 		if (k == result) {
 			currentLadderCount = 0;
@@ -49,23 +65,14 @@ void task(int cnt) {
 		return;
 	}
 
-	{
-		ladderIncluded[cnt] = 1;
-		ladder[locations[cnt].first][locations[cnt].second] = 1;
-		ladder[locations[cnt].first][locations[cnt].second+1] = -1;
-		currentLadderCount++;
-	}
-	
+	ladderIncluded[cnt] = 1;
 	task(cnt + 1);
 	
-	{
-		ladderIncluded[cnt] = 0;
-		ladder[locations[cnt].first][locations[cnt].second] = 0;
-		ladder[locations[cnt].first][locations[cnt].second + 1] = 0;
-	}
-
+	ladderIncluded[cnt] = 0;
 	task(cnt + 1);
 } 
+
+
 
 int main() {
 
@@ -78,17 +85,17 @@ int main() {
 
 	ladderIncluded = new bool[m] {1, };
 	smallestLadderCount = m;
+	currentLadderCount = m;
 	int x, y;
 	for (int i = 0; i < m; i++) {
 		cin >> x >> y;
 		ladder[y][x] = 1;
 		ladder[y][x + 1] = -1;
-		locations.push_back({y, x});
+		locations.push_back({x, y});
 	}
 
-	result = ladder_go(); 
 
-	currentLadderCount = 0;
+	result = ladder_go(); 
 	task(0);
 
 	cout << smallestLadderCount;
