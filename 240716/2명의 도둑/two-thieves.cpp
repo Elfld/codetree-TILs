@@ -6,65 +6,46 @@ int N, M, C;
 int **room;
 int max_value{0};
 
+int calculate_max(int row, int startCol){
+    int tmp_max=0;
+    for(int i=0;i<(1<<M);i++){
+        int weight=0;
+        int value=0;
+        for(int j=0;j<M;j++){
+            if(i&(1<<j)){
+                if(weight+room[row][startCol + j]<=C){
+                weight += room[row][startCol + j];
+                value += room[row][startCol + j]*room[row][startCol + j];
+                }
+                else{
+                    value=0;
+                    break;
+                }
+            }
+        }
+
+        if(value>tmp_max) tmp_max=value;
+    }
+    return tmp_max;
+}
+
 int robberies()
 {
-    int weight{0};
-    int first_value{0};
+    for(int i=0;i<N;i++){
+        for(int j=0;j<=N-M;j++){
+            int firstRobber=calculate_max(i,j);
 
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            if (j + M > N)
-                break;
-
-                
-            weight=0;
-
-            for (int k = 0; k < M; k++)
-            {
-                if (weight+room[i][j + k] <= C)
-                {
-                    weight += room[i][j + k];
-                    first_value += pow(room[i][j + k], 2);
+            for(int k=i;k<N;k++){
+                for(int p=(k==i?j+M:0);p<=N-M;p++){
+                    int secondRobber=calculate_max(k,p);
+                    
+                    max_value=max(max_value,firstRobber+secondRobber);
                 }
-                else
-                    break;
             }
-
-            weight=0;
-            
-            int l = j + M;
-            int p = i;
-            int second_value{0};
-            while (p < N)
-            {
-                if (l + M > N){
-                    if(p==N-1){break;}
-                    l=0;
-                    p++;
-                }
-
-                for(int k=0;k<M;k++){
-                    if(room[p][l+k] + weight <= C){
-                        weight+=room[p][l+k];
-                        second_value+=pow(room[p][l+k],2);
-                    }
-                    else break;
-                }
-                
-                if(first_value+second_value>max_value) {
-                    max_value=first_value+second_value;
-                }
-                weight=0;
-                second_value=0;
-                l++;
-            }
-            first_value=0;
         }
     }
 
-    return max_value;
+    return 0;
 }
 
 int main()
@@ -81,7 +62,9 @@ int main()
         }
     }
 
-    cout<<robberies();
+    robberies();
+
+    cout<<max_value;
 
      for (int i = 0; i < N; i++)
     {
