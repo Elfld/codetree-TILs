@@ -18,6 +18,9 @@ int robberies()
             if (j + M > N)
                 break;
 
+                
+            weight=0;
+
             for (int k = 0; k < M; k++)
             {
                 if (weight+room[i][j + k] <= C)
@@ -28,7 +31,9 @@ int robberies()
                 else
                     break;
             }
+
             weight=0;
+            
             int l = j + M;
             int p = i;
             int second_value{0};
