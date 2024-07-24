@@ -11,7 +11,10 @@ bool three_in_row(){
     int isThree=1;
     for(int i=1;i<answer.size();i++){
         if(answer.at(i)==prev) isThree++;
-        else isThree=1;
+        else {
+            isThree=1;
+            prev=answer.at(i);
+        }
         if (isThree==3) return true;
     }
     return false;
