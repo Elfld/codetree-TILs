@@ -19,8 +19,8 @@ bool duplicated(){
 }
 
 
-void lining(int count){
-    if(count==n){
+void lining(){
+    if(permutation.size()==n+1){
         for(int i=1;i<permutation.size();i++){
             cout<<permutation.at(i);
         }
@@ -34,9 +34,8 @@ void lining(int count){
             permutation.pop_back();
             continue;
         }
-        lining(++count);
+        lining();
     }
-
 }
 
 int main() {
@@ -44,7 +43,7 @@ int main() {
     
     permutation.push_back(0);
     
-    lining(0);
+    lining();
 
     return 0;
 
