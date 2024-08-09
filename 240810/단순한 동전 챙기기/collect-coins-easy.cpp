@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
-#include <map>
 using namespace std;
 
 int n, shortest{INT32_MAX};
@@ -15,7 +14,7 @@ void combination(int count){
     if(picked_coordinates.size()>=3&&picked_coordinates.size()<=9){
         int dist=abs(picked_coordinates[0].second.first-src.first)+
         abs(picked_coordinates[0].second.second-src.second);
-        for(int i=1;i<picked_coordinates.size();i++){
+        for(int i=0;i<picked_coordinates.size()-1;i++){
             dist+=abs(picked_coordinates[i].second.first-picked_coordinates[i+1].second.first)+
             abs(picked_coordinates[i].second.second-picked_coordinates[i+1].second.second);
         }
