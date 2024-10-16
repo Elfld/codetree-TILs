@@ -16,7 +16,7 @@ int main() {
                 p[c][d]|=2;
                 break;
             case -1:
-                p[a-1][b-1]|=2;
+                p[a][b]|=2;
                 break;
         }
         switch(b-d){
