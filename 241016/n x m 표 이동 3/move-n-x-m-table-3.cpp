@@ -5,8 +5,8 @@ using namespace std;
 int main() {
     int n,m,k;
     cin>>n>>m>>k;
-    vector<vector<int>> p(n,vector<int>(m,0));
-    vector<vector<long long>> tc(n,vector<long long>(m,0));
+    vector<vector<int>> p(n+1,vector<int>(m+1,0));
+    vector<vector<long long>> tc(n+1,vector<long long>(m+1,0));
 
     int a,b,c,d;
     for(int i=0;i<k;i++){
@@ -28,12 +28,12 @@ int main() {
                 break;
         }
     }
-    for(int i=1;i<m;i++){
+    for(int i=1;i<=m;i++){
         if(p[0][i]&1) break;
         tc[0][i]=1;
     }
 
-    for(int i=1;i<n;i++){
+    for(int i=1;i<=n;i++){
         if(p[i][0]&2) break;
         tc[i][0]=1;
     }
