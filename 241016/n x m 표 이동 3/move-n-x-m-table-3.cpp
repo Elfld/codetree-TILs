@@ -38,8 +38,8 @@ int main() {
         tc[i][0]=1;
     }
 
-    for(int i=1;i<n;i++){
-        for(int j=1;j<m;j++){
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
             tc[i][j]=tc[i-1][j]+tc[i][j-1];
         }
     }
