@@ -16,6 +16,6 @@ int main() {
         }
         else right = mid - 1;
     }
-    cout<<max;
+    cout<<maxi;
     return 0;
 }
