@@ -24,6 +24,6 @@ int main() {
         }
         
     }
-    cout<<right;
+    cout<<maxi;
     return 0;
 }
