@@ -23,7 +23,10 @@ int main() {
             left = mid + 1;
         }
         else if (res == N){
-            cout <<mid;
+            while(mid/3==0||mid/5==0){
+                mid--;
+            }
+            cout << mid;
             return 0;
         } 
         else {
