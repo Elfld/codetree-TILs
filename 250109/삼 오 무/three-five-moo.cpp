@@ -2,10 +2,10 @@
 #include <cmath>
 using namespace std;
 
-int howmoo(int k){
-    int moo3 = k/3;
-    int moo5 = k/5;
-    int moo15 = k/15;
+long long howmoo(int k){
+    long long moo3 = k/3;
+    long long moo5 = k/5;
+    long long moo15 = k/15;
 
     return moo3+moo5-moo15;
 }
@@ -14,11 +14,11 @@ int main() {
     long long N;
     cin>>N;
 
-    int left = 1, right = min(1LL<<30,3LL*N);
+    long long left = 1, right = min(1LL<<30,3LL*N);
 
     while(left <= right){
-        int mid = (left+right)/2;
-        int res = mid-howmoo(mid);
+        long long mid = (left+right)/2;
+        long long res = mid-howmoo(mid);
         if(res < N){
             left = mid + 1;
         }
