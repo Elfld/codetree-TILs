@@ -14,7 +14,7 @@ int main() {
     long long N;
     cin>>N;
 
-    long long left = 1, right = min(1LL<<30,3LL*N);
+    long long left = 1LL, right = 3LL*N;
 
     while(left <= right){
         long long mid = (left+right)/2;
