@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <climits>
 using namespace std;
 
 int main() {
@@ -18,12 +19,9 @@ int main() {
 
     while(left<=right){
         int mid = (left+right)/2;
+
         int count = 0;
         for(int i=0;i<n;i++){
-            if(ls[i]<mid) {
-                right = mid-1;
-                continue;
-            }
             count += ls[i]/mid;
         }
 
