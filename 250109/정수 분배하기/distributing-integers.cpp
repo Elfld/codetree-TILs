@@ -14,7 +14,7 @@ int main() {
         total+=a;
     }
 
-    int left{0}, right{total}, mx{0};
+    int left{1}, right{total}, mx{0};
 
     while(left<=right){
         int mid = (left+right)/2;
