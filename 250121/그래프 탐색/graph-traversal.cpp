@@ -12,6 +12,7 @@ int main() {
     for (int i = 0; i < m; i++) {
         cin >> from[i] >> to[i];
         nd[from[i]].push_back(to[i]);
+        nd[to[i]].push_back(from[i]);
     }
 
     // Write your code here!
