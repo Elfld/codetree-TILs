@@ -24,8 +24,11 @@ void qq(int k){
         od.push_back(0);
         int ct{0};
         for(int i=0;i<od.size()-1;i++){
-            ct+= A[od[i]][od[i+1]] ;
+            int cur = A[od[i]][od[i+1]];
+            cout << cur<<' ';
+            ct+= cur;
         }
+        cout<<"\n";
         mins = min(mins,ct);
         od.pop_back();
         return;
