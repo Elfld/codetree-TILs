@@ -25,17 +25,19 @@ void qq(int k){
         int ct{0};
         for(int i=0;i<od.size()-1;i++){
             int cur = A[od[i]][od[i+1]];
-            cout << cur<<' ';
+            if(cur==0) {
+                od.pop_back();
+                return;
+            }
             ct+= cur;
         }
-        cout<<"\n";
         mins = min(mins,ct);
         od.pop_back();
         return;
     }
 
     for(int i=1;i<n;i++){
-        if(!vs[i]&&A[od.back()][i]){
+        if(!vs[i]){
             vs[i]=true;
             od.push_back(i);
             qq(k+1);
