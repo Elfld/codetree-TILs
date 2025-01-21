@@ -24,9 +24,7 @@ void qq(int k){
         od.push_back(0);
         int ct{0};
         for(int i=0;i<od.size()-1;i++){
-            int cur = A[od[i]][od[i+1]];
-            if (cur==0) return;
-            ct+=cur;
+            ct+= A[od[i]][od[i+1]] ;
         }
         mins = min(mins,ct);
         od.pop_back();
@@ -34,7 +32,7 @@ void qq(int k){
     }
 
     for(int i=1;i<n;i++){
-        if(!vs[i]){
+        if(!vs[i]&&A[od.back()][i]){
             vs[i]=true;
             od.push_back(i);
             qq(k+1);
